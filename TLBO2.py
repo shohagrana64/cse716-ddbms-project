@@ -2,8 +2,6 @@ import cost_calc2
 import math
 from random import *
 import numpy as np
-import matplotlib.pyplot as plt
-
 from tabulate import tabulate
 
 QP = cost_calc2.queryPlan
@@ -118,38 +116,6 @@ def pos_sorted_index(fitness_array_before, fitness_array_after):
     for items in fitness_array_after:
         pos.append(np.where(fitness_array_before == items)[0][0])
     return pos
-
-# data={}
-# # itr=[10,20,30,40,50]
-# itr=[2,4,6,8,10]
-#
-# itr=[15,20,25,30,35]
-#
-#
-#
-# for max_iteration in itr:
-#     for iteration in range(max_iteration):
-#         gen_new_soln()
-#         fitness_array_sorted = np.sort(fitness_array)
-#         data[max_iteration]=[fitness_array_sorted]
-# print(data)
-#
-# x=[i for i in range(1,population_size+1)]
-#
-#
-# plt.figure( figsize=(8, 5))
-# plt.xlabel("QEPS")
-# plt.ylabel("QC")
-# plt.title
-# i=0
-# colormap=['Purple', 'Blue', 'Green', 'Orange', 'Red']
-# for itr in data:
-#     y=data[itr][0]
-#     clr=colormap[i]
-#     i=i+1
-#     plt.plot(x,y,color=clr,linewidth=1.5)
-#
-# plt.show()
 
 for iteration in range(max_iteration):
     gen_new_soln()

@@ -17,6 +17,7 @@ RSM = [[1, 1, 1, 1, 1, 0, 0, 0],
        [1, 0, 1, 1, 1, 0, 0, 0],
        [0, 1, 1, 0, 1, 1, 1, 0]]
 
+# QEP(Query Execution Plan): 20 different queries. each query requires which site for which relation/table
 queryPlan = {1: [1, 1, 2, 2, 2, 3, 5, 3],
              2: [3, 5, 7, 15, 4, 6, 8],
              3: [6, 7, 8, 11, 16, 6, 8, 9],
@@ -49,6 +50,8 @@ print("Number of sites:", Sites, "\nNumber of Relations", Relations, "\nNumber o
 print()
 
 # print("Table row:", Db_util2.detail)
+
+# Row Count of each table/relation in a separate array R
 R = []
 
 for item in Db_util2.detail:
@@ -63,7 +66,7 @@ def queryAffinityCost(queryPlan):
         #print(i, "site: ", sitesRequired)
         for relations in sitesRequired:
             
-            #Ki is the summation of how many times the particular site is used in a query 
+            # Ki is the summation of how many times the particular site is used in a query 
             Ki = queryPlan[i].count(relations)
             #print(relations, "table", Ki)
             QAC = QAC + (Ki * (N - Ki)) / (N * N)
@@ -73,6 +76,7 @@ def queryAffinityCost(queryPlan):
     return ret
 
 # QEP Query Execution Plan
+# QEP contains the individual query plan (single array)
 def QEP_util(QEP):
     qlcs = []
     # total is the total number of rows/tuples
@@ -88,6 +92,7 @@ def QEP_util(QEP):
                 ratio = R[j - 1] / total
                 value = value + ratio
         qlcs.append(round(value, 4))
+    # returns the minimum of qlcs array. qlcs array contains the ratio of the rows of each table.
     return min(qlcs)
 
 

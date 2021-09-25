@@ -21,7 +21,8 @@ TotalNumberofRows = 0
 for item in detail:
     TotalNumberofRows = TotalNumberofRows + detail[item]
     Table.append(item)
-    
+print("Table: ",Table)
+
 # primary key and foreign key details
 tablecolumn = {
     'vehicleOrderInfo': {'vehicleInfo': 'vehicleCode', 'vehicleOrders': 'vehicleOrderNumber'},
@@ -43,6 +44,8 @@ print(selectivitytable)
 
 def selectivityUtil(table1, table2, column1):
     # selectivtiy of join is card(join)/max(card(a),card(b):
+    
+    # count distinct rows after joining table 1 and table 2 common column
     sql = 'SELECT  count(DISTINCT ' + table1 + '.' + column1 + ' )  from ' + table1 + "  JOIN " + table2 + " ON " + table1 + '.' + column1 + " = " + table2 + '.' + column1 + ";"
     #print(sql)
     cursor.execute(sql)
@@ -53,12 +56,14 @@ def selectivityUtil(table1, table2, column1):
     #print(sql)
     cursor.execute(sql)
     result = cursor.fetchall()
+    # table 1 total rows
     t1 = result[0][0]
     #print(t1)
 
     sql = "Select count(*) from " + table2 + ";"
     cursor.execute(sql)
     result = cursor.fetchall()
+    # table 2 total rows
     t2 = result[0][0]
 
     sel = round(j / max(t1, t2), 4)
@@ -86,15 +91,3 @@ print("Sum of all Tuples", TotalNumberofRows)
 print('CLPC of the database:', ClpcOfDatabase)
 
 print("-------------------------------------------------")
-# sql = 'SELECT COUNT(DISTINCT officeCode) FROM employees;'
-# cursor.execute(sql)
-# result = cursor.fetchall()
-# print(result)
-
-# sql = 'SELECT COUNT(*) FROM employees;'
-# cursor.execute(sql)
-# result = cursor.fetchall()
-# print(result)
-
-# cursor.close()
-# db.close()
